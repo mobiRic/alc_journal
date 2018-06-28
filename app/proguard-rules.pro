@@ -23,3 +23,9 @@
 # Glowworm Utils
 -assumenosideeffects class mobi.glowworm.lib.utils.debug.Dbug { public * ; }
 
+# About Libraries
+-keep class .R
+-keep class **.R$* {
+    <fields>;
+}
+

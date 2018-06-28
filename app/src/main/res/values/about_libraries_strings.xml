@@ -1,0 +1,20 @@
+<!--Defines strings used by About Libraries-->
+<resources>
+
+    <string name="aboutLibraries_description_showIcon">true</string>
+    <string name="aboutLibraries_description_showVersion">true</string>
+
+    <!-- Glowworm Utils -->
+    <string name="define_GlowwormUtils">year;owner</string>
+    <string name="library_GlowwormUtils_author">Glowworm Software</string>
+    <string name="library_GlowwormUtils_authorWebsite">https://github.com/mobiRic</string>
+    <string name="library_GlowwormUtils_libraryName">Glowworm Utils</string>
+    <string name="library_GlowwormUtils_libraryDescription">A set of utility classes designed to help with Android development.</string>
+    <string name="library_GlowwormUtils_libraryVersion">1.0</string>
+    <string name="library_GlowwormUtils_licenseVersion">Apache Version 2.0</string>
+    <string name="library_GlowwormUtils_licenseId">apache_2_0</string>
+    <string name="library_GlowwormUtils_isOpenSource">true</string>
+    <string name="library_GlowwormUtils_owner">Glowworm Software</string>
+    <string name="library_GlowwormUtils_year">2011</string>
+
+</resources>
