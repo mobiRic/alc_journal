@@ -106,7 +106,8 @@ dependencies {
 
     /* Testing */
     testImplementation "junit:junit:${testVersions.junit}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${testVersions.testRunner}"
+    androidTestImplementation "com.android.support.test:runner:${testVersions.testRunner}"
+    androidTestImplementation "com.android.support.test:rules:${testVersions.testRunner}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${testVersions.espresso}"
 
     testImplementation "android.arch.persistence.room:testing:${libVersions.aacRoom}"
