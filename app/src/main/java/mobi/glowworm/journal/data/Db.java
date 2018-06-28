@@ -15,24 +15,25 @@ public abstract class Db extends RoomDatabase {
 
     private static final String DATABASE_NAME = "ijenali";
 
-    private static Db INSTANCE;
-
-    synchronized public static void init(@NonNull Context context) {
-        if (INSTANCE != null) {
-            return;
-        }
-
-        INSTANCE = Room.databaseBuilder(
-                context.getApplicationContext(),
-                Db.class,
-                DATABASE_NAME)
-                .build();
-    }
+    volatile private static Db INSTANCE;
 
     @NonNull
-    public static Db getInstance() {
+    public static Db getInstance(Context context) {
+
+        // lazy loading
         if (INSTANCE == null) {
-            throw new IllegalStateException("Room must be initialized before use.");
+
+            // synchronized double locking
+            synchronized (Db.class) {
+                if (INSTANCE == null) {
+
+                    INSTANCE = Room.databaseBuilder(
+                            context.getApplicationContext(),
+                            Db.class,
+                            DATABASE_NAME)
+                            .build();
+                }
+            }
         }
 
         return INSTANCE;
