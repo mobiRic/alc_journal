@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="divider_1dp">1dp</dimen>
+
+    <dimen name="m8">8dp</dimen>
+    <dimen name="m16">16dp</dimen>
+    <dimen name="m24">24dp</dimen>
+    <dimen name="m32">32dp</dimen>
+
+</resources>
