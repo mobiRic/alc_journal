@@ -5,6 +5,7 @@ import android.app.Application;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
+import mobi.glowworm.journal.data.Db;
 
 public class App extends Application {
 
@@ -15,6 +16,9 @@ public class App extends Application {
         if (BuildConfig.CRASHLYTICS) {
             Fabric.with(this, new Crashlytics());
         }
+
+        // initialise Room
+        Db.init(this);
     }
 
 }
