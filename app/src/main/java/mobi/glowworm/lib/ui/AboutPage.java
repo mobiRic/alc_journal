@@ -20,7 +20,8 @@ public class AboutPage {
     public static void launchAboutPage(@NonNull Context context) {
         new LibsBuilder()
                 .withFields(R.string.class.getFields())
-                .withActivityTheme(R.style.AppTheme)
+                // TODO fix theming
+//                .withActivityTheme(R.style.AppTheme)
                 .start(context);
     }
 

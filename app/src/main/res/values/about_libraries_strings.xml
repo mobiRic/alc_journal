@@ -4,6 +4,16 @@
     <string name="aboutLibraries_description_showIcon">true</string>
     <string name="aboutLibraries_description_showVersion">true</string>
 
+    <!-- Android Open Source Project -->
+    <string name="define_AOSP">year;owner</string>
+    <string name="library_AOSP_author">The Android Open Source Project</string>
+    <string name="library_AOSP_libraryName">The Android Open Source Project</string>
+    <string name="library_AOSP_libraryDescription">This application makes use of the Android SDK and Support Libraries.</string>
+    <string name="library_AOSP_licenseVersion">Apache Version 2.0</string>
+    <string name="library_AOSP_licenseId">apache_2_0</string>
+    <string name="library_AOSP_isOpenSource">true</string>
+    <string name="library_AOSP_owner">The Android Open Source Project</string>
+
     <!-- Glowworm Utils -->
     <string name="define_GlowwormUtils">year;owner</string>
     <string name="library_GlowwormUtils_author">Glowworm Software</string>
