@@ -4,11 +4,13 @@
     <!--Action Items-->
     <string name="action_done_editing">Done</string>
 
-    <!--Edit Journal-->
+    <!--Journal List-->
+    <string name="title_journal_list">@string/app_name</string>
+
+    <!--Journal Details-->
+    <string name="title_journal_detail">@string/app_name</string>
     <string name="hint_journal_title">Title</string>
     <string name="hint_journal_description">Tell me about it</string>
-    <string name="title_journalentry_list">Items</string>
-    <string name="title_journalentry_detail">JournalEntry Detail</string>
 
 
 </resources>

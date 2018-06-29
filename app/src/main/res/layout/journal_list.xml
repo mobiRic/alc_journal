@@ -6,8 +6,8 @@
     android:name="mobi.glowworm.journal.JournalEntryListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:paddingEnd="@dimen/m16"
+    android:paddingStart="@dimen/m16"
     app:layoutManager="LinearLayoutManager"
     tools:context="mobi.glowworm.journal.JournalListActivity"
     tools:listitem="@layout/journal_list_content"/>
