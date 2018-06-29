@@ -7,6 +7,7 @@ import mobi.glowworm.journal.data.Db;
 import mobi.glowworm.journal.data.model.JournalEntry;
 
 public class DetailViewModel extends ViewModel {
+
     private final LiveData<JournalEntry> liveJournal;
 
     public DetailViewModel(Db db, int journalId) {

@@ -80,4 +80,28 @@ public class JournalEntry {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof JournalEntry)) return false;
+
+        JournalEntry that = (JournalEntry) o;
+
+        if (getId() != that.getId()) return false;
+        if (getUserId() != that.getUserId()) return false;
+        if (getTitle() != null ? !getTitle().equals(that.getTitle()) : that.getTitle() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null) return false;
+        return getDate() != null ? getDate().equals(that.getDate()) : that.getDate() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId();
+        result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + getUserId();
+        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
+        return result;
+    }
 }
