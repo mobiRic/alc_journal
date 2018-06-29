@@ -25,6 +25,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     public JournalAdapter(@Nullable List<JournalEntry> items, @NonNull OnJournalClickListener journalClickListener) {
         this.items = items;
         this.journalClickListener = journalClickListener;
+        this.setHasStableIds(true);
     }
 
     @NonNull

@@ -2,6 +2,7 @@ package mobi.glowworm.journal.ui.list;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -56,7 +57,9 @@ public class JournalListActivity extends ADataActivity implements JournalAdapter
         initRecyclerView();
 
         // get the journals for this user
-        final LiveData<List<JournalEntry>> liveJournals = getDao().loadAllJournalsForUser(getCurrentUserId());
+        JournalListViewModelFactory vmFactory = new JournalListViewModelFactory(getDatabase(), getCurrentUserId());
+        JournalListViewModel viewModel = ViewModelProviders.of(this, vmFactory).get(JournalListViewModel.class);
+        final LiveData<List<JournalEntry>> liveJournals = viewModel.getJournalList();
         liveJournals.observe(this, new Observer<List<JournalEntry>>() {
             @Override
             public void onChanged(@Nullable List<JournalEntry> journals) {
