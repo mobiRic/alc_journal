@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ import mobi.glowworm.lib.utils.debug.Dbug;
 public class DetailActivity extends AppCompatActivity {
 
     public static final String KEY_JOURNAL_ID = "KEY_JOURNAL_ID";
-    private static final int NEW_JOURNAL = -1;
+    public static final int NEW_JOURNAL = -1;
 
     private int journalId = NEW_JOURNAL;
     private Db db;
@@ -37,6 +38,11 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         date = new Date();
         tvTitle = findViewById(R.id.tv_journal_detail_title);
