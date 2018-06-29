@@ -91,7 +91,7 @@ public class DetailActivity extends AppCompatActivity {
 
         String title = tvTitle.getText().toString();
         String description = tvDesc.getText().toString();
-        final JournalEntry journal = new JournalEntry(journalId, title, description, date);
+        final JournalEntry journal = new JournalEntry(title, description, date);
 
         // check for updates
         if (journal.equals(journalExistingInDatabase)) {
@@ -102,14 +102,26 @@ public class DetailActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (journalId == NEW_JOURNAL) {
-                        // TODO update id fields to use long - not going to be an issue until we have many journals
-                        journalId = (int) db.dao().insertJournal(journal);
-                        Dbug.log("Created new journal [", journalId, "]");
+                        // do not add empty journals to the database
+                        if (!journal.isEmpty()) {
+                            // TODO update id fields to use long - not going to be an issue until we have many journals
+                            journalId = (int) db.dao().insertJournal(journal);
+                            Dbug.log("Created new journal [", journalId, "]");
+                        } else {
+                            Dbug.log("Ignoring blank journal");
+                        }
                     } else {
-                        db.dao().updateJournal(journal);
-                        Dbug.log("Updated journal [", journalId, "]");
+                        journal.setId(journalId);
+                        if (journal.isEmpty()) {
+                            // delete journals from the database if the contents has been deleted
+                            db.dao().deleteJournal(journal);
+                            Dbug.log("Deleted journal [", journalId, "]");
+                            journalId = NEW_JOURNAL;
+                        } else {
+                            db.dao().updateJournal(journal);
+                            Dbug.log("Updated journal [", journalId, "]");
+                        }
                     }
-
                 }
             });
         }

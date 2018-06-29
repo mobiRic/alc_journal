@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.text.TextUtils;
 
 import java.util.Date;
 
@@ -103,5 +104,16 @@ public class JournalEntry {
         result = 31 * result + getUserId();
         result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
         return result;
+    }
+
+    /**
+     * Checks if this journal has any entry data to save.
+     * <p>
+     * This is based on having a valid title or description.
+     *
+     * @return <code>true</code> if the journal contains any data
+     */
+    public boolean isEmpty() {
+        return TextUtils.isEmpty(title) && TextUtils.isEmpty(description);
     }
 }
