@@ -1,6 +1,7 @@
 package mobi.glowworm.journal;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +11,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import mobi.glowworm.journal.data.model.JournalEntry;
-import mobi.glowworm.journal.dummy.DummyContent;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder> {
 
-    private final List<DummyContent.DummyItem> mValues;
+    @Nullable
+    private final List<JournalEntry> items;
     @NonNull
     private final OnJournalClickListener journalClickListener;
-    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            DummyContent.DummyItem item = (DummyContent.DummyItem) view.getTag();
-            journalClickListener.onJournalClicked(Integer.parseInt(item.id));
-        }
-    };
 
-    public JournalAdapter(List<DummyContent.DummyItem> items, @NonNull OnJournalClickListener journalClickListener) {
-        mValues = items;
+    public JournalAdapter(@Nullable List<JournalEntry> items, @NonNull OnJournalClickListener journalClickListener) {
+        this.items = items;
         this.journalClickListener = journalClickListener;
     }
 
@@ -40,26 +34,39 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        @SuppressWarnings("ConstantConditions")
+        JournalEntry entry = items.get(position);
 
-        holder.itemView.setTag(mValues.get(position));
-        holder.itemView.setOnClickListener(mOnClickListener);
+        holder.tvTitle.setText(entry.getTitle());
+        holder.tvSummary.setText(entry.getDescription());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO change item id to be a long as per previous todo
+                journalClickListener.onJournalClicked((int) getItemId(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return (items != null) ? items.size() : 0;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return (items != null) ? items.get(position).getId() : DetailActivity.NEW_JOURNAL;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView mIdView;
-        final TextView mContentView;
+        final TextView tvTitle;
+        final TextView tvSummary;
 
         ViewHolder(View view) {
             super(view);
-            mIdView = view.findViewById(R.id.id_text);
-            mContentView = view.findViewById(R.id.content);
+            tvTitle = view.findViewById(R.id.tv_journal_title);
+            tvSummary = view.findViewById(R.id.tv_journal_description);
         }
     }
 

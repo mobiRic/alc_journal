@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import mobi.glowworm.journal.data.model.JournalEntry;
-import mobi.glowworm.journal.dummy.DummyContent;
+import mobi.glowworm.lib.ui.widget.EmptyRecyclerView;
 
 /**
  * Main activity that shows a list of all {@link JournalEntry}
@@ -24,6 +23,9 @@ import mobi.glowworm.journal.dummy.DummyContent;
  * to be recorded.
  */
 public class JournalListActivity extends AppCompatActivity implements JournalAdapter.OnJournalClickListener {
+
+    @NonNull
+    private EmptyRecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +44,14 @@ public class JournalListActivity extends AppCompatActivity implements JournalAda
             }
         });
 
-        View recyclerView = findViewById(R.id.journal_list);
+        recyclerView = findViewById(R.id.journal_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        setupRecyclerView();
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new JournalAdapter(DummyContent.ITEMS, this));
+    private void setupRecyclerView() {
+        recyclerView.setEmptyView(findViewById(R.id.journal_list_empty_view));
+        recyclerView.setAdapter(new JournalAdapter(null, this));
     }
 
     @Override
