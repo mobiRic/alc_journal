@@ -13,7 +13,7 @@ import android.view.View;
 import java.util.List;
 
 import mobi.glowworm.journal.data.model.JournalEntry;
-import mobi.glowworm.lib.ui.widget.EmptyRecyclerView;
+import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
 
 /**
  * Main activity that shows a list of all {@link JournalEntry}
@@ -29,7 +29,7 @@ import mobi.glowworm.lib.ui.widget.EmptyRecyclerView;
 public class JournalListActivity extends ADataActivity implements JournalAdapter.OnJournalClickListener {
 
     @NonNull
-    private EmptyRecyclerView recyclerView;
+    private EmptyLoadingRecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +58,15 @@ public class JournalListActivity extends ADataActivity implements JournalAdapter
             @Override
             public void onChanged(@Nullable List<JournalEntry> journals) {
                 recyclerView.swapAdapter(new JournalAdapter(journals, JournalListActivity.this), false);
+                recyclerView.setLoading(false);
             }
         });
     }
 
     private void initRecyclerView() {
         recyclerView.setEmptyView(findViewById(R.id.journal_list_empty_view));
+        recyclerView.setLoadingView(findViewById(R.id.journal_list_loading_view));
+        recyclerView.setLoading(true);
     }
 
     @Override
