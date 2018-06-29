@@ -173,6 +173,8 @@ public class EmptyLoadingRecyclerView extends RecyclerView {
         // check if empty
         if ((getAdapter() == null) || (getAdapter().getItemCount() == 0)) {
             show(emptyView);
+        } else {
+            hide(emptyView);
         }
     }
 
