@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -45,8 +44,7 @@ public class JournalListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                launchNewJournal();
             }
         });
 
@@ -57,6 +55,15 @@ public class JournalListActivity extends AppCompatActivity {
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
+    }
+
+    /**
+     * Helper method to launch the {@link DetailActivity} without sending
+     * a journal id to it. This will allow the user to create a new journal.
+     */
+    private void launchNewJournal() {
+        Intent i = new Intent(this, DetailActivity.class);
+        startActivity(i);
     }
 
     public static class SimpleItemRecyclerViewAdapter
