@@ -1,5 +1,6 @@
 package mobi.glowworm.journal.data;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -15,7 +16,7 @@ import mobi.glowworm.journal.data.model.JournalEntry;
 public interface JournalDao {
 
     @Query("SELECT * FROM journal_entry WHERE user_id = :userId ORDER BY date DESC")
-    List<JournalEntry> loadAllJournalsForUser(int userId);
+    LiveData<List<JournalEntry>> loadAllJournalsForUser(int userId);
 
     @Insert
     void insertJournal(JournalEntry journal);
@@ -27,5 +28,5 @@ public interface JournalDao {
     void deleteJournal(JournalEntry journal);
 
     @Query("SELECT * FROM journal_entry WHERE id = :journalId")
-    JournalEntry loadJournalById(int journalId);
+    LiveData<JournalEntry> loadJournalById(int journalId);
 }
