@@ -110,16 +110,22 @@ public class DetailActivity extends AppCompatActivity {
                         } else {
                             Dbug.log("Ignoring blank journal");
                         }
+
+                        journalExistingInDatabase = journal;
                     } else {
                         journal.setId(journalId);
                         if (journal.isEmpty()) {
                             // delete journals from the database if the contents has been deleted
                             db.dao().deleteJournal(journal);
                             Dbug.log("Deleted journal [", journalId, "]");
+
                             journalId = NEW_JOURNAL;
+                            journalExistingInDatabase = null;
                         } else {
                             db.dao().updateJournal(journal);
                             Dbug.log("Updated journal [", journalId, "]");
+
+                            journalExistingInDatabase = journal;
                         }
                     }
                 }
@@ -138,7 +144,16 @@ public class DetailActivity extends AppCompatActivity {
         Dbug.log("New journal");
     }
 
-    private void updateUi(JournalEntry updatedJournal) {
+    private void updateUi(@Nullable JournalEntry updatedJournal) {
+        if (updatedJournal == null) {
+            // create blank entry
+            journalId = NEW_JOURNAL;
+            date = new Date();
+            tvTitle.clearComposingText();
+            tvDesc.clearComposingText();
+            return;
+        }
+
         date = updatedJournal.getDate();
         tvTitle.setText(updatedJournal.getTitle());
         tvDesc.setText(updatedJournal.getDescription());
