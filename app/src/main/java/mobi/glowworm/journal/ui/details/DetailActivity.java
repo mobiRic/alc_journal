@@ -1,4 +1,4 @@
-package mobi.glowworm.journal;
+package mobi.glowworm.journal.ui.details;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,17 +16,17 @@ import com.example.android.todolist.AppExecutors;
 import java.util.Date;
 import java.util.concurrent.Executor;
 
-import mobi.glowworm.journal.data.Db;
+import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
+import mobi.glowworm.journal.ui.ADataActivity;
 import mobi.glowworm.lib.utils.debug.Dbug;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends ADataActivity {
 
     public static final String KEY_JOURNAL_ID = "KEY_JOURNAL_ID";
     public static final int NEW_JOURNAL = -1;
 
     private int journalId = NEW_JOURNAL;
-    private Db db;
     private TextView tvTitle;
     private TextView tvDesc;
     private Date date;
@@ -48,8 +47,6 @@ public class DetailActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tv_journal_detail_title);
         tvDesc = findViewById(R.id.tv_journal_detail_description);
 
-        db = Db.getInstance(this);
-
         // check for rotation
         if (savedInstanceState != null) {
             journalId = savedInstanceState.getInt(KEY_JOURNAL_ID, NEW_JOURNAL);
@@ -63,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
             if (journalId == NEW_JOURNAL) {
                 journalId = i.getIntExtra(KEY_JOURNAL_ID, NEW_JOURNAL);
 
-                DetailViewModelFactory vmFactory = new DetailViewModelFactory(db, journalId);
+                DetailViewModelFactory vmFactory = new DetailViewModelFactory(getDatabase(), journalId);
                 DetailViewModel viewModel = ViewModelProviders.of(this, vmFactory).get(DetailViewModel.class);
                 final LiveData<JournalEntry> liveJournal = viewModel.getJournal();
                 liveJournal.observe(this, new Observer<JournalEntry>() {
@@ -111,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
                         // do not add empty journals to the database
                         if (!journal.isEmpty()) {
                             // TODO update id fields to use long - not going to be an issue until we have many journals
-                            journalId = (int) db.dao().insertJournal(journal);
+                            journalId = (int) getDao().insertJournal(journal);
                             Dbug.log("Created new journal [", journalId, "]");
                         } else {
                             Dbug.log("Ignoring blank journal");
@@ -122,13 +119,13 @@ public class DetailActivity extends AppCompatActivity {
                         journal.setId(journalId);
                         if (journal.isEmpty()) {
                             // delete journals from the database if the contents has been deleted
-                            db.dao().deleteJournal(journal);
+                            getDao().deleteJournal(journal);
                             Dbug.log("Deleted journal [", journalId, "]");
 
                             journalId = NEW_JOURNAL;
                             journalExistingInDatabase = null;
                         } else {
-                            db.dao().updateJournal(journal);
+                            getDao().updateJournal(journal);
                             Dbug.log("Updated journal [", journalId, "]");
 
                             journalExistingInDatabase = journal;

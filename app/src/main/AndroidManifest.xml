@@ -18,7 +18,7 @@
 
 
         <activity
-            android:name=".JournalListActivity"
+            android:name=".ui.list.JournalListActivity"
             android:label="@string/title_journal_list"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity"/>
+        <activity android:name=".ui.details.DetailActivity"/>
     </application>
 
 </manifest>

@@ -1,16 +1,23 @@
-package mobi.glowworm.journal;
+package mobi.glowworm.journal.ui.list;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import java.util.List;
+
+import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
-import mobi.glowworm.journal.dummy.DummyContent;
+import mobi.glowworm.journal.ui.ADataActivity;
+import mobi.glowworm.journal.ui.details.DetailActivity;
+import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
 
 /**
  * Main activity that shows a list of all {@link JournalEntry}
@@ -23,7 +30,10 @@ import mobi.glowworm.journal.dummy.DummyContent;
  * blank {@link DetailActivity} allowing a new journal
  * to be recorded.
  */
-public class JournalListActivity extends AppCompatActivity implements JournalAdapter.OnJournalClickListener {
+public class JournalListActivity extends ADataActivity implements JournalAdapter.OnJournalClickListener {
+
+    @NonNull
+    private EmptyLoadingRecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +52,37 @@ public class JournalListActivity extends AppCompatActivity implements JournalAda
             }
         });
 
-        View recyclerView = findViewById(R.id.journal_list);
+        recyclerView = findViewById(R.id.journal_list);
         assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
+        initRecyclerView();
+
+        // get the journals for this user
+        JournalListViewModelFactory vmFactory = new JournalListViewModelFactory(getDatabase(), getCurrentUserId());
+        JournalListViewModel viewModel = ViewModelProviders.of(this, vmFactory).get(JournalListViewModel.class);
+        final LiveData<List<JournalEntry>> liveJournals = viewModel.getJournalList();
+        liveJournals.observe(this, new Observer<List<JournalEntry>>() {
+            @Override
+            public void onChanged(@Nullable List<JournalEntry> journals) {
+                recyclerView.swapAdapter(new JournalAdapter(journals, JournalListActivity.this), false);
+                recyclerView.setLoading(false);
+            }
+        });
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new JournalAdapter(DummyContent.ITEMS, this));
+    private void initRecyclerView() {
+        recyclerView.setEmptyView(findViewById(R.id.journal_list_empty_view));
+        recyclerView.setLoadingView(findViewById(R.id.journal_list_loading_view));
+        recyclerView.setLoading(true);
     }
 
     @Override
     public void onJournalClicked(int journalId) {
         launchJournalDetails(journalId);
+    }
+
+    private int getCurrentUserId() {
+        // TODO implement this to return a real user id after Firebase Auth has been added
+        return JournalEntry.LOCAL_USER_NOT_LOGGED_IN;
     }
 
     /**

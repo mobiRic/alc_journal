@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">ijenali</string>
+    <string name="app_name">Ijenali</string>
 
     <!--Action Items-->
     <string name="action_done_editing">Done</string>
 
     <!--Journal List-->
     <string name="title_journal_list">@string/app_name</string>
+    <string name="empty_journal_list">Welcome to Ijenali!\n\nWhy not try adding a new journal with the button below.</string>
 
     <!--Journal Details-->
     <string name="title_journal_detail">@string/app_name</string>
