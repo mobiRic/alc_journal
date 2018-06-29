@@ -12,10 +12,11 @@ ext {
             targetSdk : 27,
     ]
     libVersions = [
-            supportLib : '27.1.1',
-            crashlytics: '2.9.4@aar',
-            aacRoom    : '1.1.1',
-            aboutLib   : '6.0.9',
+            supportLib            : '27.1.1',
+            architectureComponents: '1.1.1',
+            crashlytics           : '2.9.4@aar',
+            aacRoom               : '1.1.1',
+            aboutLib              : '6.0.9',
     ]
     testVersions = [
             junit     : '4.12',
@@ -107,8 +108,10 @@ dependencies {
     }
 
     /* Architecture Components */
-    implementation "android.arch.persistence.room:runtime:${libVersions.aacRoom}"
-    annotationProcessor "android.arch.persistence.room:compiler:${libVersions.aacRoom}"
+    implementation "android.arch.persistence.room:runtime:${libVersions.architectureComponents}"
+    implementation "android.arch.lifecycle:extensions:${libVersions.architectureComponents}"
+    annotationProcessor "android.arch.persistence.room:compiler:${libVersions.architectureComponents}"
+    annotationProcessor "android.arch.lifecycle:compiler:${libVersions.architectureComponents}"
 
     /* Crashlytics */
     implementation("com.crashlytics.sdk.android:crashlytics:${libVersions.crashlytics}") {
