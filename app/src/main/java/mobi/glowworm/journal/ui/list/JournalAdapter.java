@@ -1,4 +1,4 @@
-package mobi.glowworm.journal;
+package mobi.glowworm.journal.ui.list;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
+import mobi.glowworm.journal.ui.details.DetailActivity;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder> {
 

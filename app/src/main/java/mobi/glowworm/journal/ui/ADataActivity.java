@@ -1,4 +1,4 @@
-package mobi.glowworm.journal;
+package mobi.glowworm.journal.ui;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

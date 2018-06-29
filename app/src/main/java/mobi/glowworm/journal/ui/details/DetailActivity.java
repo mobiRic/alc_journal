@@ -1,4 +1,4 @@
-package mobi.glowworm.journal;
+package mobi.glowworm.journal.ui.details;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -16,7 +16,9 @@ import com.example.android.todolist.AppExecutors;
 import java.util.Date;
 import java.util.concurrent.Executor;
 
+import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
+import mobi.glowworm.journal.ui.ADataActivity;
 import mobi.glowworm.lib.utils.debug.Dbug;
 
 public class DetailActivity extends ADataActivity {

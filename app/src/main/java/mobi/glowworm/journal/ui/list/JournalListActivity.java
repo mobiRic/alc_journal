@@ -1,4 +1,4 @@
-package mobi.glowworm.journal;
+package mobi.glowworm.journal.ui.list;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -12,7 +12,10 @@ import android.view.View;
 
 import java.util.List;
 
+import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
+import mobi.glowworm.journal.ui.ADataActivity;
+import mobi.glowworm.journal.ui.details.DetailActivity;
 import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
 
 /**

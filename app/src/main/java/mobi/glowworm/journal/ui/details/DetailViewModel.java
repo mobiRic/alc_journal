@@ -1,4 +1,4 @@
-package mobi.glowworm.journal;
+package mobi.glowworm.journal.ui.details;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
