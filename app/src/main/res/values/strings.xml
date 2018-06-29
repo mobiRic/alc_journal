@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ijenali</string>
+
+    <!--Action Items-->
+    <string name="action_done_editing">Done</string>
+
+    <!--Edit Journal-->
+    <string name="hint_journal_title">Title</string>
+    <string name="hint_journal_description">Tell me about it</string>
+
+
 </resources>
