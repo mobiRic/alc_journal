@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:hint="@string/hint_journal_title"
         android:maxLines="1"
         tools:text="It was a sunny day"/>
 
@@ -25,7 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:hint="@string/hint_journal_description"
         android:maxLines="2"
         tools:text="Today was Friday, and a beautiful summer's day. All the birds were out and about."/>
 

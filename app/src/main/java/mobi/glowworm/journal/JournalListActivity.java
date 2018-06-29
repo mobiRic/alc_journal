@@ -1,12 +1,16 @@
 package mobi.glowworm.journal;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import java.util.List;
 
 import mobi.glowworm.journal.data.model.JournalEntry;
 import mobi.glowworm.lib.ui.widget.EmptyRecyclerView;
@@ -22,7 +26,7 @@ import mobi.glowworm.lib.ui.widget.EmptyRecyclerView;
  * blank {@link DetailActivity} allowing a new journal
  * to be recorded.
  */
-public class JournalListActivity extends AppCompatActivity implements JournalAdapter.OnJournalClickListener {
+public class JournalListActivity extends ADataActivity implements JournalAdapter.OnJournalClickListener {
 
     @NonNull
     private EmptyRecyclerView recyclerView;
@@ -46,17 +50,30 @@ public class JournalListActivity extends AppCompatActivity implements JournalAda
 
         recyclerView = findViewById(R.id.journal_list);
         assert recyclerView != null;
-        setupRecyclerView();
+        initRecyclerView();
+
+        // get the journals for this user
+        final LiveData<List<JournalEntry>> liveJournals = getDao().loadAllJournalsForUser(getCurrentUserId());
+        liveJournals.observe(this, new Observer<List<JournalEntry>>() {
+            @Override
+            public void onChanged(@Nullable List<JournalEntry> journals) {
+                recyclerView.swapAdapter(new JournalAdapter(journals, JournalListActivity.this), false);
+            }
+        });
     }
 
-    private void setupRecyclerView() {
+    private void initRecyclerView() {
         recyclerView.setEmptyView(findViewById(R.id.journal_list_empty_view));
-        recyclerView.setAdapter(new JournalAdapter(null, this));
     }
 
     @Override
     public void onJournalClicked(int journalId) {
         launchJournalDetails(journalId);
+    }
+
+    private int getCurrentUserId() {
+        // TODO implement this to return a real user id after Firebase Auth has been added
+        return JournalEntry.LOCAL_USER_NOT_LOGGED_IN;
     }
 
     /**
