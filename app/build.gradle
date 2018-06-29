@@ -110,6 +110,9 @@ dependencies {
     /* Architecture Components */
     implementation "android.arch.persistence.room:runtime:${libVersions.architectureComponents}"
     implementation "android.arch.lifecycle:extensions:${libVersions.architectureComponents}"
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
     annotationProcessor "android.arch.persistence.room:compiler:${libVersions.architectureComponents}"
     annotationProcessor "android.arch.lifecycle:compiler:${libVersions.architectureComponents}"
 

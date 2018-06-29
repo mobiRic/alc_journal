@@ -7,6 +7,8 @@
     <!--Edit Journal-->
     <string name="hint_journal_title">Title</string>
     <string name="hint_journal_description">Tell me about it</string>
+    <string name="title_journalentry_list">Items</string>
+    <string name="title_journalentry_detail">JournalEntry Detail</string>
 
 
 </resources>
