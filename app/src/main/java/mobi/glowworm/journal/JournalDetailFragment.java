@@ -13,11 +13,11 @@ import mobi.glowworm.journal.dummy.DummyContent;
 
 /**
  * A fragment representing a single JournalEntry detail screen.
- * This fragment is either contained in a {@link JournalEntryListActivity}
- * in two-pane mode (on tablets) or a {@link JournalEntryDetailActivity}
+ * This fragment is either contained in a {@link JournalListActivity}
+ * in two-pane mode (on tablets) or a {@link JournalDetailActivity}
  * on handsets.
  */
-public class JournalEntryDetailFragment extends Fragment {
+public class JournalDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -33,7 +33,7 @@ public class JournalEntryDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public JournalEntryDetailFragment() {
+    public JournalDetailFragment() {
     }
 
     @Override
@@ -57,7 +57,7 @@ public class JournalEntryDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.journalentry_detail, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {

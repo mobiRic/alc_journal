@@ -1,0 +1,13 @@
+<mobi.glowworm.lib.ui.widget.EmptyRecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/journal_list"
+    android:name="mobi.glowworm.journal.JournalEntryListFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    app:layoutManager="LinearLayoutManager"
+    tools:context="mobi.glowworm.journal.JournalListActivity"
+    tools:listitem="@layout/journal_list_content"/>

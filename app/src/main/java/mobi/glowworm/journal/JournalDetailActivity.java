@@ -16,14 +16,14 @@ import android.view.View;
  * An activity representing a single JournalEntry detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link JournalEntryListActivity}.
+ * in a {@link JournalListActivity}.
  */
-public class JournalEntryDetailActivity extends AppCompatActivity {
+public class JournalDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_journalentry_detail);
+        setContentView(R.layout.activity_journal_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,9 +55,9 @@ public class JournalEntryDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(JournalEntryDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(JournalEntryDetailFragment.ARG_ITEM_ID));
-            JournalEntryDetailFragment fragment = new JournalEntryDetailFragment();
+            arguments.putString(JournalDetailFragment.ARG_ITEM_ID,
+                    getIntent().getStringExtra(JournalDetailFragment.ARG_ITEM_ID));
+            JournalDetailFragment fragment = new JournalDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.journalentry_detail_container, fragment)
@@ -76,7 +76,7 @@ public class JournalEntryDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpTo(this, new Intent(this, JournalEntryListActivity.class));
+            NavUtils.navigateUpTo(this, new Intent(this, JournalListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
