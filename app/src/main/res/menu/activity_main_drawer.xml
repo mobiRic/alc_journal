@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/nav_section_main"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_new_journal"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="@string/action_new_journal"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_menu_revert"
+            android:title="@string/action_sign_out"/>
+    </group>
+
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/action_about"/>
+</menu>

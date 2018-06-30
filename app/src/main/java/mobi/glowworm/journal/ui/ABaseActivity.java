@@ -66,16 +66,26 @@ public class ABaseActivity extends AppCompatActivity {
      * this ID will be unique per user.
      *
      * @return current user's email address if signed in
+     */
+    @SuppressWarnings("ConstantConditions") // Google users all have email addresses
+    @NonNull
+    protected String getCurrentUserId() {
+        return getCurrentUser().getEmail();
+    }
+
+    /**
+     * Asserts there is a currently signed in user before returning it.
+     *
+     * @return current {@link FirebaseUser}
      * @throws IllegalStateException if there is not user signed in
      */
     @NonNull
-    protected String getCurrentUserId() {
+    protected FirebaseUser getCurrentUser() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             throw new IllegalStateException("User is not signed into the app.");
         }
-
-        return currentUser.getEmail();
+        return currentUser;
     }
 
     /**

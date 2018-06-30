@@ -2,7 +2,15 @@
     <string name="app_name">Ijenali</string>
 
     <!--Action Items-->
+    <string name="action_new_journal">New Entry</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="action_about">About Ijenali</string>
     <string name="action_done_editing">Done</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Navigation Drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!--Sign In-->
     <string name="content_signin_branding">This is the launch screen</string>
@@ -18,5 +26,8 @@
     <string name="hint_journal_title">Title</string>
     <string name="hint_journal_description">Tell me about it</string>
 
+    <!--About-->
+    <string name="title_about">@string/action_about</string>
+    <string name="about_desc">Follow your Dreams, Capture your Thoughts, Fulfill your Potential!</string>
 
 </resources>
