@@ -18,6 +18,8 @@ ext {
             crashlytics           : '2.9.4@aar',
             aacRoom               : '1.1.1',
             aboutLib              : '6.0.9',
+            circleimageview       : '2.2.0',
+            glide                 : '4.7.1',
     ]
     firebaseVersions = [
             core  : '16.0.1',
@@ -129,6 +131,11 @@ dependencies {
     implementation("com.crashlytics.sdk.android:crashlytics:${libVersions.crashlytics}") {
         transitive = true;
     }
+
+    /* Images */
+    implementation "de.hdodenhof:circleimageview:${libVersions.circleimageview}"
+    implementation "com.github.bumptech.glide:glide:${libVersions.glide}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${libVersions.glide}"
 
     /* Testing */
     testImplementation "junit:junit:${testVersions.junit}"

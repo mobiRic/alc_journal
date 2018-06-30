@@ -3,6 +3,11 @@
 
     <!--Action Items-->
     <string name="action_done_editing">Done</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Navigation Drawer-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!--Sign In-->
     <string name="content_signin_branding">This is the launch screen</string>
@@ -17,6 +22,5 @@
     <string name="title_journal_detail">@string/app_name</string>
     <string name="hint_journal_title">Title</string>
     <string name="hint_journal_description">Tell me about it</string>
-
 
 </resources>
