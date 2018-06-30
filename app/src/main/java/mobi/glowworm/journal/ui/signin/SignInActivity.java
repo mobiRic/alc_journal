@@ -38,6 +38,13 @@ public class SignInActivity extends ABaseActivity {
 
         setContentView(R.layout.activity_sign_in);
         btnSignIn = findViewById(R.id.btn_signin);
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnSignIn.setVisibility(View.INVISIBLE);
+                signIn();
+            }
+        });
     }
 
     @Override
@@ -80,8 +87,4 @@ public class SignInActivity extends ABaseActivity {
                 RC_FIREBASE_AUTH);
     }
 
-    public void onSignInClick(View view) {
-        btnSignIn.setVisibility(View.INVISIBLE);
-        signIn();
-    }
 }
