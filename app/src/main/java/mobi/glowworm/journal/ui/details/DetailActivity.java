@@ -3,8 +3,10 @@ package mobi.glowworm.journal.ui.details;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
@@ -44,6 +46,14 @@ public class DetailActivity extends ABaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle(getTitle());
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         date = new Date();
         tvTitle = findViewById(R.id.tv_journal_detail_title);
@@ -94,11 +104,8 @@ public class DetailActivity extends ABaseActivity {
     protected void onStop() {
         Dbug.log("Checking for changes");
 
-        String title = tvTitle.getText().toString();
-        String description = tvDesc.getText().toString();
-        final JournalEntry journal = new JournalEntry(getCurrentUserId(), title, description, date);
-
         // check for updates
+        final JournalEntry journal = createJournalFromUi();
         if (journal.equals(journalExistingInDatabase)) {
             Dbug.log("No changes to journal entry");
         } else {
@@ -106,7 +113,7 @@ public class DetailActivity extends ABaseActivity {
             dbExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    if (journalId == NEW_JOURNAL) {
+                    if (journal.getId() == NEW_JOURNAL) {
                         // do not add empty journals to the database
                         if (!journal.isEmpty()) {
                             // TODO update id fields to use long - not going to be an issue until we have many journals
@@ -118,14 +125,9 @@ public class DetailActivity extends ABaseActivity {
 
                         journalExistingInDatabase = journal;
                     } else {
-                        journal.setId(journalId);
                         if (journal.isEmpty()) {
                             // delete journals from the database if the contents has been deleted
-                            getDao().deleteJournal(journal);
-                            Dbug.log("Deleted journal [", journalId, "]");
-
-                            journalId = NEW_JOURNAL;
-                            journalExistingInDatabase = null;
+                            deleteJournal(journal);
                         } else {
                             getDao().updateJournal(journal);
                             Dbug.log("Updated journal [", journalId, "]");
@@ -137,6 +139,35 @@ public class DetailActivity extends ABaseActivity {
             });
         }
         super.onStop();
+    }
+
+    /**
+     * Creates a new Journal representing the current screen.
+     *
+     * @return {@link JournalEntry} object being edited
+     */
+    @NonNull
+    private JournalEntry createJournalFromUi() {
+        String title = tvTitle.getText().toString();
+        String description = tvDesc.getText().toString();
+        JournalEntry journal = new JournalEntry(getCurrentUserId(), title, description, date);
+        if (journalId != NEW_JOURNAL) {
+            journal.setId(journalId);
+        }
+        return journal;
+    }
+
+    /**
+     * Helper method to delete a given journal from the database.
+     *
+     * @param journal {@link JournalEntry} containing the correct ID to delete
+     */
+    private void deleteJournal(JournalEntry journal) {
+        getDao().deleteJournal(journal);
+        Dbug.log("Deleted journal [", journalId, "]");
+
+        journalId = NEW_JOURNAL;
+        journalExistingInDatabase = null;
     }
 
     private void initUiForExistingJournal() {
@@ -183,8 +214,8 @@ public class DetailActivity extends ABaseActivity {
                 onBackPressed();
                 return true;
             }
-            case R.id.action_done_editing: {
-                onBackPressed();
+            case R.id.action_delete: {
+                onDeletePressed();
                 return true;
             }
         }
@@ -195,5 +226,31 @@ public class DetailActivity extends ABaseActivity {
     public void onBackPressed() {
         // TODO do we need to implement a confirmation dialog?
         super.onBackPressed();
+    }
+
+    /**
+     * Handles the confirmation flow when the user selects to delete a journal entry with the menu option.
+     */
+    private void onDeletePressed() {
+        alert(
+                R.string.alert_delete_journal_title,
+                R.string.alert_delete_journal_message,
+                android.R.drawable.ic_delete,
+                R.string.alert_delete_journal_btn_positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Executor dbExecutor = AppExecutors.getInstance().diskIO();
+                        dbExecutor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                JournalEntry journal = createJournalFromUi();
+                                deleteJournal(journal);
+                            }
+                        });
+
+                        finish();
+                    }
+                },
+                R.string.alert_delete_journal_btn_negative, null);
     }
 }
