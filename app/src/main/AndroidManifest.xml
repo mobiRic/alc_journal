@@ -16,7 +16,6 @@
             android:name="io.fabric.ApiKey"
             android:value="ae4ac9549380b69157a8ebd0fd5c462b7fdd8d85"/>
 
-
         <activity
             android:name=".ui.list.JournalListActivity"
             android:label="@string/title_journal_list"
@@ -28,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.details.DetailActivity"/>
+        <activity android:name=".ui.signin.SignInActivity"/>
     </application>
 
 </manifest>

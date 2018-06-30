@@ -4,6 +4,10 @@
     <!--Action Items-->
     <string name="action_done_editing">Done</string>
 
+    <!--Sign In-->
+    <string name="content_signin_branding">This is the launch screen</string>
+    <string name="desc_signin_branding">Follow your Dreams\n\nCapture your Thoughts\n\nFulfill your Potential</string>
+
     <!--Journal List-->
     <string name="title_journal_list">@string/app_name</string>
     <string name="empty_journal_list">Welcome to Ijenali!\n\nWhy not try adding a new journal with the button below.</string>

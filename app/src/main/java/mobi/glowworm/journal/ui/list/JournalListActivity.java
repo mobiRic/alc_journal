@@ -40,7 +40,8 @@ public class JournalListActivity extends ABaseActivity implements JournalAdapter
         super.onCreate(savedInstanceState);
 
         if (!isUserSignedIn()) {
-            signIn();
+            onSignedOut();
+            return;
         }
 
         setContentView(R.layout.activity_journal_list);
