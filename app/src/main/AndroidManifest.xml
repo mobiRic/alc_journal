@@ -16,5 +16,16 @@
             android:name="io.fabric.ApiKey"
             android:value="ae4ac9549380b69157a8ebd0fd5c462b7fdd8d85"/>
 
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
+
 </manifest>
