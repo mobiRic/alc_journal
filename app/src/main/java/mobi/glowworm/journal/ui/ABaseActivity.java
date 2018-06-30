@@ -19,12 +19,10 @@ import mobi.glowworm.journal.data.JournalDao;
 import mobi.glowworm.lib.utils.debug.Dbug;
 
 /**
- * Abstract {@link android.app.Activity} containing helper methods
- * for working with the  {@link Db} and {@link JournalDao}.
- * <p>
- * Also includes common methods for user authentication.
+ * Base {@link android.app.Activity} containing helper methods
+ * common to all parts of the application.
  */
-public class ADataActivity extends AppCompatActivity {
+public class ABaseActivity extends AppCompatActivity {
 
     private static final int RC_FIREBASE_AUTH = 1337;
 

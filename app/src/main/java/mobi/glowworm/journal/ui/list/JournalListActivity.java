@@ -15,7 +15,7 @@ import java.util.List;
 
 import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
-import mobi.glowworm.journal.ui.ADataActivity;
+import mobi.glowworm.journal.ui.ABaseActivity;
 import mobi.glowworm.journal.ui.details.DetailActivity;
 import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
 
@@ -30,7 +30,7 @@ import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
  * blank {@link DetailActivity} allowing a new journal
  * to be recorded.
  */
-public class JournalListActivity extends ADataActivity implements JournalAdapter.OnJournalClickListener {
+public class JournalListActivity extends ABaseActivity implements JournalAdapter.OnJournalClickListener {
 
     @NonNull
     private EmptyLoadingRecyclerView recyclerView;
