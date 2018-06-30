@@ -127,7 +127,7 @@ public class DetailActivity extends ABaseActivity {
             dbExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    if (journal.getId() == NEW_JOURNAL) {
+                    if (journalId == NEW_JOURNAL) {
                         // do not add empty journals to the database
                         if (!journal.isEmpty()) {
                             // TODO update id fields to use long - not going to be an issue until we have many journals
@@ -195,7 +195,7 @@ public class DetailActivity extends ABaseActivity {
         tvTitle.requestFocus();
 
         // show keyboard - delay is required to make it work
-        // TODO find the right way to get the keyboard to show 
+        // TODO find the right way to get the keyboard to show
         tvTitle.postDelayed(new Runnable() {
             @Override
             public void run() {
