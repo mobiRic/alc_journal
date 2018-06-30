@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import mobi.glowworm.journal.R;
@@ -21,10 +22,13 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     private final List<JournalEntry> items;
     @NonNull
     private final OnJournalClickListener journalClickListener;
+    @NonNull
+    private final SimpleDateFormat formatDate;
 
-    public JournalAdapter(@Nullable List<JournalEntry> items, @NonNull OnJournalClickListener journalClickListener) {
+    public JournalAdapter(@Nullable List<JournalEntry> items, @NonNull OnJournalClickListener journalClickListener, @NonNull SimpleDateFormat formatDate) {
         this.items = items;
         this.journalClickListener = journalClickListener;
+        this.formatDate = formatDate;
         this.setHasStableIds(true);
     }
 
@@ -41,6 +45,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         @SuppressWarnings("ConstantConditions")
         JournalEntry entry = items.get(position);
 
+        holder.tvDate.setText(formatDate.format(entry.getDate()));
         holder.tvTitle.setText(entry.getTitle());
         holder.tvTitle.setVisibility(TextUtils.isEmpty(entry.getTitle()) ? View.GONE : View.VISIBLE);
         holder.tvSummary.setText(entry.getDescription());
@@ -66,11 +71,13 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        final TextView tvDate;
         final TextView tvTitle;
         final TextView tvSummary;
 
         ViewHolder(View view) {
             super(view);
+            tvDate = view.findViewById(R.id.tv_journal_date);
             tvTitle = view.findViewById(R.id.tv_journal_title);
             tvSummary = view.findViewById(R.id.tv_journal_description);
         }

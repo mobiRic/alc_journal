@@ -1,8 +1,13 @@
 package mobi.glowworm.journal.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
@@ -11,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.Db;
 import mobi.glowworm.journal.data.JournalDao;
 import mobi.glowworm.journal.ui.signin.SignInActivity;
@@ -29,6 +35,9 @@ public class ABaseActivity extends AppCompatActivity {
      */
     public static final String USER_NOT_SIGNED_IN = "";
 
+    @Nullable
+    private AlertDialog dialog;
+
     @NonNull
     protected Db getDatabase() {
         return Db.getInstance(this);
@@ -46,6 +55,15 @@ public class ABaseActivity extends AppCompatActivity {
         // ensure only logged in users can access journals
         if (isSignInRequired() && !isUserSignedIn()) {
             signOut();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (dialog != null) {
+            dialog.dismiss();
         }
     }
 
@@ -139,5 +157,26 @@ public class ABaseActivity extends AppCompatActivity {
         Intent i = new Intent(this, activity);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchAndFinish(i);
+    }
+
+    protected void alert(@StringRes final int title, @StringRes final int message, @DrawableRes final int icon,
+                         @StringRes final int positiveBtn, @Nullable final DialogInterface.OnClickListener positiveListener,
+                         @StringRes final int negativeBtn, @Nullable final DialogInterface.OnClickListener negativeListener) {
+        if (dialog != null) {
+            dialog.dismiss();
+        }
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ABaseActivity.this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+                builder.setTitle(title);
+                builder.setIcon(icon);
+                builder.setPositiveButton(positiveBtn, positiveListener);
+                builder.setNegativeButton(negativeBtn, negativeListener);
+                builder.setMessage(message);
+                dialog = builder.show();
+            }
+        });
     }
 }

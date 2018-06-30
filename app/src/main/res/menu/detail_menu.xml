@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_done_editing"
-        android:icon="@drawable/ic_action_done_editing"
-        android:title="@string/action_done_editing"
-        app:showAsAction="always"/>
+        android:id="@+id/action_delete"
+        android:title="@string/action_delete"
+        app:showAsAction="never"/>
 </menu>
