@@ -3,6 +3,7 @@ package mobi.glowworm.lib.ui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 
 import mobi.glowworm.journal.R;
@@ -20,8 +21,12 @@ public class AboutPage {
     public static void launchAboutPage(@NonNull Context context) {
         new LibsBuilder()
                 .withFields(R.string.class.getFields())
+                .withActivityTitle(context.getString(R.string.action_about))
+                .withAboutAppName(context.getString(R.string.app_name))
+                .withAboutDescription(context.getString(R.string.about_desc))
                 // TODO fix theming
 //                .withActivityTheme(R.style.AppTheme)
+                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .start(context);
     }
 
