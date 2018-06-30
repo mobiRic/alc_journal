@@ -10,10 +10,19 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
+        android:id="@+id/tv_journal_date"
+        style="@style/TextAppearance.AppCompat.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Saturday, 30 June - 10:53 pm"/>
+
+    <TextView
         android:id="@+id/tv_journal_title"
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/m8"
+        android:layout_marginTop="@dimen/m16"
         android:ellipsize="end"
         android:maxLines="1"
         tools:text="It was a sunny day"/>
@@ -26,5 +35,6 @@
         android:ellipsize="end"
         android:maxLines="2"
         tools:text="Today was Friday, and a beautiful summer's day. All the birds were out and about."/>
+
 
 </LinearLayout>

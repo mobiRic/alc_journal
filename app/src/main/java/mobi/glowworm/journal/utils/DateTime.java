@@ -32,4 +32,14 @@ public class DateTime {
     public static SimpleDateFormat getFormatTime(Context context) {
         return new SimpleDateFormat(context.getString(R.string.format_time));
     }
+
+    /**
+     * Helper method to return a full date and time formatter.
+     *
+     * @param context Context required to get the format string
+     * @return {@link SimpleDateFormat} representing a full date and time
+     */
+    public static SimpleDateFormat getFormatDateTime(Context context) {
+        return new SimpleDateFormat(context.getString(R.string.format_day_date_time));
+    }
 }

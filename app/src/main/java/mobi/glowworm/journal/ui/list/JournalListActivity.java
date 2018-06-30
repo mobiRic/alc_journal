@@ -27,6 +27,7 @@ import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
 import mobi.glowworm.journal.ui.ABaseActivity;
 import mobi.glowworm.journal.ui.details.DetailActivity;
+import mobi.glowworm.journal.utils.DateTime;
 import mobi.glowworm.lib.ui.AboutPage;
 import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
 
@@ -111,7 +112,9 @@ public class JournalListActivity extends ABaseActivity
         liveJournals.observe(this, new Observer<List<JournalEntry>>() {
             @Override
             public void onChanged(@Nullable List<JournalEntry> journals) {
-                recyclerView.swapAdapter(new JournalAdapter(journals, JournalListActivity.this), false);
+                recyclerView.swapAdapter(
+                        new JournalAdapter(journals, JournalListActivity.this, DateTime.getFormatDateTime(JournalListActivity.this)),
+                        false);
                 recyclerView.setLoading(false);
             }
         });

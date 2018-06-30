@@ -40,5 +40,6 @@
     <!--Format Strings-->
     <string name="format_day_date">EEEE, dd MMMM</string>
     <string name="format_time">hh:mm a</string>
+    <string name="format_day_date_time">EEEE, dd MMMM - hh:mm a</string>
 
 </resources>
