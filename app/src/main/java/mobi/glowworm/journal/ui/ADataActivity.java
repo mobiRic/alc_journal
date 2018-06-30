@@ -11,8 +11,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Collections;
+import java.util.Arrays;
 
+import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.Db;
 import mobi.glowworm.journal.data.JournalDao;
 import mobi.glowworm.lib.utils.debug.Dbug;
@@ -86,10 +87,16 @@ public class ADataActivity extends AppCompatActivity {
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(
-                                Collections.singletonList(
+                                Arrays.asList(
+                                        new AuthUI.IdpConfig.EmailBuilder().build(),
                                         new AuthUI.IdpConfig.GoogleBuilder().build()))
+                        .setLogo(R.mipmap.ic_launcher)
+                        .setTheme(R.style.AppTheme)
+                        .setTosUrl("https://superapp.example.com/terms-of-service.html")
+                        .setPrivacyPolicyUrl("https://superapp.example.com/privacy-policy.html")
                         .build(),
                 RC_FIREBASE_AUTH);
+
     }
 
     /**
