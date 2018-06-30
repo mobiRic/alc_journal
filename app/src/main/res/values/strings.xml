@@ -22,9 +22,9 @@
     <string name="empty_journal_list">Welcome to Ijenali!\n\nWhy not try adding a new journal with the button below.</string>
 
     <!--Journal Details-->
-    <string name="title_journal_detail">@string/app_name</string>
-    <string name="hint_journal_title">Title</string>
-    <string name="hint_journal_description">Tell me about it</string>
+    <string name="title_journal_detail">Captured Thoughts</string>
+    <string name="hint_journal_title">Add a main thought</string>
+    <string name="hint_journal_description">Tell me more about it</string>
 
     <!--About-->
     <string name="title_about">@string/action_about</string>

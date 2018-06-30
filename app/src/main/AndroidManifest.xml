@@ -18,8 +18,7 @@
 
         <activity
             android:name=".ui.LoadingActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -28,12 +27,12 @@
         </activity>
         <activity
             android:name=".ui.list.JournalListActivity"
-            android:label="@string/title_journal_list"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ui.details.DetailActivity"/>
+            android:label="@string/title_journal_list"/>
         <activity
-            android:name=".ui.signin.SignInActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".ui.details.DetailActivity"
+            android:label="@string/title_journal_detail"/>
+        <activity
+            android:name=".ui.signin.SignInActivity"/>
     </application>
 
 </manifest>
