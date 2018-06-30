@@ -38,6 +38,11 @@ public class JournalListActivity extends ADataActivity implements JournalAdapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!isUserSignedIn()) {
+            signIn();
+        }
+
         setContentView(R.layout.activity_journal_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
