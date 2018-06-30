@@ -18,10 +18,10 @@ import java.util.concurrent.Executor;
 
 import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
-import mobi.glowworm.journal.ui.ADataActivity;
+import mobi.glowworm.journal.ui.ABaseActivity;
 import mobi.glowworm.lib.utils.debug.Dbug;
 
-public class DetailActivity extends ADataActivity {
+public class DetailActivity extends ABaseActivity {
 
     public static final String KEY_JOURNAL_ID = "KEY_JOURNAL_ID";
     public static final int NEW_JOURNAL = -1;
@@ -94,7 +94,7 @@ public class DetailActivity extends ADataActivity {
 
         String title = tvTitle.getText().toString();
         String description = tvDesc.getText().toString();
-        final JournalEntry journal = new JournalEntry(title, description, date);
+        final JournalEntry journal = new JournalEntry(getCurrentUserId(), title, description, date);
 
         // check for updates
         if (journal.equals(journalExistingInDatabase)) {

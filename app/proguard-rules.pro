@@ -29,3 +29,7 @@
     <fields>;
 }
 
+# Firebase
+-keepattributes Signature
+-keepattributes *Annotation*
+

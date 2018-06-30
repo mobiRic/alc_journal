@@ -12,7 +12,7 @@ public class JournalListViewModel extends ViewModel {
 
     private final LiveData<List<JournalEntry>> liveJournalList;
 
-    public JournalListViewModel(Db db, int userId) {
+    public JournalListViewModel(Db db, String userId) {
         super();
 
         liveJournalList = db.dao().loadAllJournalsForUser(userId);

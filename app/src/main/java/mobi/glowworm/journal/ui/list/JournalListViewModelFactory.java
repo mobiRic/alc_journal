@@ -10,9 +10,9 @@ public class JournalListViewModelFactory extends ViewModelProvider.NewInstanceFa
 
     @NonNull
     private final Db db;
-    private final int userId;
+    private final String userId;
 
-    public JournalListViewModelFactory(@NonNull Db db, int userId) {
+    public JournalListViewModelFactory(@NonNull Db db, String userId) {
         this.db = db;
         this.userId = userId;
     }

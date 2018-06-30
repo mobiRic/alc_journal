@@ -11,11 +11,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
-import mobi.glowworm.journal.ui.ADataActivity;
+import mobi.glowworm.journal.ui.ABaseActivity;
 import mobi.glowworm.journal.ui.details.DetailActivity;
 import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
 
@@ -30,7 +33,7 @@ import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
  * blank {@link DetailActivity} allowing a new journal
  * to be recorded.
  */
-public class JournalListActivity extends ADataActivity implements JournalAdapter.OnJournalClickListener {
+public class JournalListActivity extends ABaseActivity implements JournalAdapter.OnJournalClickListener {
 
     @NonNull
     private EmptyLoadingRecyclerView recyclerView;
@@ -38,6 +41,12 @@ public class JournalListActivity extends ADataActivity implements JournalAdapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!isUserSignedIn()) {
+            onSignedOut();
+            return;
+        }
+
         setContentView(R.layout.activity_journal_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -80,11 +89,6 @@ public class JournalListActivity extends ADataActivity implements JournalAdapter
         launchJournalDetails(journalId);
     }
 
-    private int getCurrentUserId() {
-        // TODO implement this to return a real user id after Firebase Auth has been added
-        return JournalEntry.LOCAL_USER_NOT_LOGGED_IN;
-    }
-
     /**
      * Helper method to launch the {@link DetailActivity} for a
      * given {@link JournalEntry}.
@@ -94,7 +98,7 @@ public class JournalListActivity extends ADataActivity implements JournalAdapter
     private void launchJournalDetails(int journalId) {
         Intent i = new Intent(this, DetailActivity.class);
         i.putExtra(DetailActivity.KEY_JOURNAL_ID, journalId);
-        startActivity(i);
+        launch(i);
     }
 
     /**
@@ -102,7 +106,6 @@ public class JournalListActivity extends ADataActivity implements JournalAdapter
      * a journal id to it. This will allow the user to create a new journal.
      */
     private void launchNewJournal() {
-        Intent i = new Intent(this, DetailActivity.class);
-        startActivity(i);
+        launch(DetailActivity.class);
     }
 }
