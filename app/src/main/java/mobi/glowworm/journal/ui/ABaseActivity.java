@@ -35,10 +35,8 @@ public class ABaseActivity extends AppCompatActivity {
         super.onStart();
 
         // ensure only logged in users can access journals
-        if (!(this instanceof SignInActivity)) {
-            if (!isUserSignedIn()) {
-                signOut();
-            }
+        if (isSignInRequired() && !isUserSignedIn()) {
+            signOut();
         }
     }
 
@@ -50,6 +48,19 @@ public class ABaseActivity extends AppCompatActivity {
      */
     protected boolean isUserSignedIn() {
         return FirebaseAuth.getInstance().getCurrentUser() != null;
+    }
+
+    /**
+     * This method determines if a given activity requires an authenticated
+     * user.
+     * <p>
+     * Override this method and return <code>false</code> to allow an
+     * unauthenticated user to use the activity.
+     *
+     * @return <code>true</code> by default to enforce users to be signed in.
+     */
+    protected boolean isSignInRequired() {
+        return true;
     }
 
     /**

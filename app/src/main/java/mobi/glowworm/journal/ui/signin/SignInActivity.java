@@ -11,6 +11,7 @@ import java.util.Collections;
 import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.ui.ABaseActivity;
 import mobi.glowworm.journal.ui.list.JournalListActivity;
+import mobi.glowworm.lib.ui.widget.Boast;
 
 /**
  * A basic welcome screen prompting the user to sign in to the app.
@@ -48,12 +49,18 @@ public class SignInActivity extends ABaseActivity {
                     launchAndFinish(JournalListActivity.class);
                 } else {
                     btnSignIn.setVisibility(View.VISIBLE);
+                    Boast.showText(this, R.string.rationale_signin);
                 }
                 return;
             }
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected boolean isSignInRequired() {
+        return false;
     }
 
     /**
