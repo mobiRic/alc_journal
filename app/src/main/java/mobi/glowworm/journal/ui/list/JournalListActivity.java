@@ -4,15 +4,22 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.bumptech.glide.module.GlideApp;
 
 import java.util.List;
 
@@ -33,10 +40,14 @@ import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
  * blank {@link DetailActivity} allowing a new journal
  * to be recorded.
  */
-public class JournalListActivity extends ABaseActivity implements JournalAdapter.OnJournalClickListener {
+public class JournalListActivity extends ABaseActivity
+        implements JournalAdapter.OnJournalClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     @NonNull
     private EmptyLoadingRecyclerView recyclerView;
+    private ImageView ivNavUserProfile;
+    private TextView tvNavUserName;
+    private TextView tvNavUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +58,7 @@ public class JournalListActivity extends ABaseActivity implements JournalAdapter
             return;
         }
 
-        setContentView(R.layout.activity_journal_list);
+        setContentView(R.layout.nav_drawer);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +71,33 @@ public class JournalListActivity extends ABaseActivity implements JournalAdapter
                 launchNewJournal();
             }
         });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        // populate navigation drawer header with current user details
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        View headerView = navigationView.getHeaderView(0);
+        if (headerView != null) {
+            headerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO implement action when user header is clicked
+                }
+            });
+
+            ivNavUserProfile = headerView.findViewById(R.id.iv_nav_header_user_profile);
+            tvNavUserName = (TextView) headerView.findViewById(R.id.tv_nav_header_user_name);
+            tvNavUserEmail = (TextView) headerView.findViewById(R.id.tv_nav_header_user_email);
+
+            setUserProfilePic(getUserProfilePicUrl());
+            tvNavUserName.setText(getUserName());
+            tvNavUserEmail.setText(getUserEmail());
+        }
 
         recyclerView = findViewById(R.id.journal_list);
         assert recyclerView != null;
@@ -78,10 +116,93 @@ public class JournalListActivity extends ABaseActivity implements JournalAdapter
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void initRecyclerView() {
         recyclerView.setEmptyView(findViewById(R.id.journal_list_empty_view));
         recyclerView.setLoadingView(findViewById(R.id.journal_list_loading_view));
         recyclerView.setLoading(true);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    /**
+     * Displays the user profile picture in the navigation drawer header.
+     *
+     * @param userProfilePic profile pic URL of current user
+     */
+    protected void setUserProfilePic(@Nullable Uri userProfilePic) {
+        if (userProfilePic == null) {
+            return;
+        }
+
+        GlideApp
+                .with(this)
+                .load(userProfilePic)
+                .placeholder(R.mipmap.ic_launcher_round)
+                .fitCenter()
+                .into(ivNavUserProfile);
+    }
+
+    /**
+     * Returns URL of the profile picture to display in the navigation drawer.
+     *
+     * @return profile pic URL of current user
+     */
+    @Nullable
+    protected Uri getUserProfilePicUrl() {
+        return getCurrentUser().getPhotoUrl();
+    }
+
+    /**
+     * Returns the user name to display in the navigation drawer.
+     *
+     * @return correctly formatted user name if available
+     */
+    @Nullable
+    protected String getUserName() {
+        return getCurrentUser().getDisplayName();
+    }
+
+    /**
+     * Returns the email address to display in the navigation drawer.
+     *
+     * @return email address of current user if available
+     */
+    @Nullable
+    protected String getUserEmail() {
+        return getCurrentUser().getEmail();
     }
 
     @Override
