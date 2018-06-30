@@ -1,5 +1,6 @@
 package mobi.glowworm.journal.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -110,5 +111,28 @@ public class ABaseActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    protected void launchAndFinish(@NonNull Class<? extends Activity> activity) {
+        launchAndFinish(new Intent(this, activity));
+    }
+
+    protected void launchAndFinish(@NonNull Intent i) {
+        launch(i);
+        finish();
+    }
+
+    protected void launch(@NonNull Intent i) {
+        startActivity(i);
+    }
+
+    protected void launch(@NonNull Class<? extends Activity> activity) {
+        launch(new Intent(this, activity));
+    }
+
+    protected void launchAndClearTask(@NonNull Class<? extends Activity> activity) {
+        Intent i = new Intent(this, activity);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        launchAndFinish(i);
     }
 }

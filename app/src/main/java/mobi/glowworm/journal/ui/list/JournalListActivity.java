@@ -99,7 +99,7 @@ public class JournalListActivity extends ABaseActivity implements JournalAdapter
     private void launchJournalDetails(int journalId) {
         Intent i = new Intent(this, DetailActivity.class);
         i.putExtra(DetailActivity.KEY_JOURNAL_ID, journalId);
-        startActivity(i);
+        launch(i);
     }
 
     /**
@@ -107,7 +107,6 @@ public class JournalListActivity extends ABaseActivity implements JournalAdapter
      * a journal id to it. This will allow the user to create a new journal.
      */
     private void launchNewJournal() {
-        Intent i = new Intent(this, DetailActivity.class);
-        startActivity(i);
+        launch(DetailActivity.class);
     }
 }
