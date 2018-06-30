@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.util.Date;
@@ -12,13 +13,6 @@ import java.util.Date;
 @Entity(tableName = "journal_entry")
 public class JournalEntry {
 
-    /**
-     * The user id for a local user who has not logged into the app.
-     * Once a user signs in with Google Authentication this id will
-     * be updated.
-     */
-    public static final int LOCAL_USER_NOT_LOGGED_IN = -1;
-
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -26,19 +20,20 @@ public class JournalEntry {
     private String description;
 
     @ColumnInfo(name = "user_id")
-    private int userId = LOCAL_USER_NOT_LOGGED_IN;
+    private String userId;
 
     private Date date;
 
     @Ignore
-    public JournalEntry(String title, String description, Date date) {
+    public JournalEntry(@NonNull String userId, String title, String description, Date date) {
+        this.userId = userId;
         this.title = title;
         this.description = description;
         this.date = date;
     }
 
-    public JournalEntry(int id, String title, String description, Date date) {
-        this(title, description, date);
+    public JournalEntry(int id, @NonNull String userId, String title, String description, Date date) {
+        this(userId, title, description, date);
         this.id = id;
     }
 
@@ -66,11 +61,11 @@ public class JournalEntry {
         this.description = description;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -82,6 +77,7 @@ public class JournalEntry {
         this.date = date;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,9 +86,9 @@ public class JournalEntry {
         JournalEntry that = (JournalEntry) o;
 
         if (getId() != that.getId()) return false;
-        if (getUserId() != that.getUserId()) return false;
         if (getTitle() != null ? !getTitle().equals(that.getTitle()) : that.getTitle() != null) return false;
         if (getDescription() != null ? !getDescription().equals(that.getDescription()) : that.getDescription() != null) return false;
+        if (getUserId() != null ? !getUserId().equals(that.getUserId()) : that.getUserId() != null) return false;
         return getDate() != null ? getDate().equals(that.getDate()) : that.getDate() == null;
     }
 
@@ -101,7 +97,7 @@ public class JournalEntry {
         int result = getId();
         result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + getUserId();
+        result = 31 * result + (getUserId() != null ? getUserId().hashCode() : 0);
         result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
         return result;
     }

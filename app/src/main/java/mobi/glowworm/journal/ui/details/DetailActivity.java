@@ -94,7 +94,7 @@ public class DetailActivity extends ABaseActivity {
 
         String title = tvTitle.getText().toString();
         String description = tvDesc.getText().toString();
-        final JournalEntry journal = new JournalEntry(title, description, date);
+        final JournalEntry journal = new JournalEntry(getCurrentUserId(), title, description, date);
 
         // check for updates
         if (journal.equals(journalExistingInDatabase)) {

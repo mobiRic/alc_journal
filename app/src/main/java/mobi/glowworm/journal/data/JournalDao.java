@@ -17,7 +17,7 @@ import mobi.glowworm.journal.data.model.JournalEntry;
 public interface JournalDao {
 
     @Query("SELECT * FROM journal_entry WHERE user_id = :userId ORDER BY date DESC")
-    LiveData<List<JournalEntry>> loadAllJournalsForUser(int userId);
+    LiveData<List<JournalEntry>> loadAllJournalsForUser(String userId);
 
     @Insert
     long insertJournal(@NonNull JournalEntry journal);

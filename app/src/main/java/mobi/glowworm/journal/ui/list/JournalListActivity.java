@@ -11,6 +11,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 import mobi.glowworm.journal.R;
@@ -84,11 +87,6 @@ public class JournalListActivity extends ABaseActivity implements JournalAdapter
     @Override
     public void onJournalClicked(int journalId) {
         launchJournalDetails(journalId);
-    }
-
-    private int getCurrentUserId() {
-        // TODO implement this to return a real user id after Firebase Auth has been added
-        return JournalEntry.LOCAL_USER_NOT_LOGGED_IN;
     }
 
     /**

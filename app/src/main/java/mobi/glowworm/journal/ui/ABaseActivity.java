@@ -9,6 +9,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import mobi.glowworm.journal.data.Db;
 import mobi.glowworm.journal.data.JournalDao;
@@ -19,6 +20,14 @@ import mobi.glowworm.journal.ui.signin.SignInActivity;
  * common to all parts of the application.
  */
 public class ABaseActivity extends AppCompatActivity {
+
+    /**
+     * The user id for a local user who has not logged into the app.
+     * <p>
+     * Once a user signs in with Google Authentication this id will
+     * be updated with the user's email address.
+     */
+    public static final String USER_NOT_SIGNED_IN = "";
 
     @NonNull
     protected Db getDatabase() {
@@ -48,6 +57,25 @@ public class ABaseActivity extends AppCompatActivity {
      */
     protected boolean isUserSignedIn() {
         return FirebaseAuth.getInstance().getCurrentUser() != null;
+    }
+
+    /**
+     * Users are identified by their email addresses.
+     * <p>
+     * Due to support for Google Sign In, which requires an email address,
+     * this ID will be unique per user.
+     *
+     * @return current user's email address if signed in
+     * @throws IllegalStateException if there is not user signed in
+     */
+    @NonNull
+    protected String getCurrentUserId() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            throw new IllegalStateException("User is not signed into the app.");
+        }
+
+        return currentUser.getEmail();
     }
 
     /**
