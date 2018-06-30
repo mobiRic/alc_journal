@@ -30,7 +30,8 @@
             android:label="@string/title_journal_list"/>
         <activity
             android:name=".ui.details.DetailActivity"
-            android:label="@string/title_journal_detail"/>
+            android:label="@string/title_journal_detail"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity
             android:name=".ui.signin.SignInActivity"/>
     </application>

@@ -29,12 +29,16 @@
     <string name="empty_journal_list">Welcome to Ijenali!\n\nWhy not try adding a new journal with the button below.</string>
 
     <!--Journal Details-->
-    <string name="title_journal_detail">Captured Thoughts</string>
-    <string name="hint_journal_title">Add a main thought</string>
-    <string name="hint_journal_description">Tell me more about it</string>
+    <string name="title_journal_detail">Thoughts &amp; Feelings</string>
+    <string name="hint_journal_title">What\'s on your mind?</string>
+    <string name="hint_journal_description">Tell me more about it…</string>
 
     <!--About-->
     <string name="title_about">@string/action_about</string>
     <string name="about_desc">Follow your Dreams, Capture your Thoughts, Fulfill your Potential!</string>
+
+    <!--Format Strings-->
+    <string name="format_day_date">EEEE, dd MMMM</string>
+    <string name="format_time">hh:mm a</string>
 
 </resources>
