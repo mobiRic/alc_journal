@@ -4,15 +4,18 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.module.GlideApp;
+import com.dgreenhalgh.android.simpleitemdecoration.linear.StartOffsetItemDecoration;
 
 import java.util.List;
 
@@ -134,6 +138,17 @@ public class JournalListActivity extends ABaseActivity
         recyclerView.setEmptyView(findViewById(R.id.journal_list_empty_view));
         recyclerView.setLoadingView(findViewById(R.id.journal_list_loading_view));
         recyclerView.setLoading(true);
+
+        // spacing between rows and below last row
+        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        Drawable spacer = ContextCompat.getDrawable(this, R.drawable.divider_16dp);
+        mDividerItemDecoration.setDrawable(spacer);
+        recyclerView.addItemDecoration(mDividerItemDecoration);
+
+        // spacing before first row
+        StartOffsetItemDecoration mStartItemDecoration = new StartOffsetItemDecoration(spacer);
+        recyclerView.addItemDecoration(mStartItemDecoration);
     }
 
     @Override
