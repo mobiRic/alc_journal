@@ -27,6 +27,7 @@ import mobi.glowworm.journal.R;
 import mobi.glowworm.journal.data.model.JournalEntry;
 import mobi.glowworm.journal.ui.ABaseActivity;
 import mobi.glowworm.journal.ui.details.DetailActivity;
+import mobi.glowworm.lib.ui.AboutPage;
 import mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView;
 
 /**
@@ -132,24 +133,21 @@ public class JournalListActivity extends ABaseActivity
         recyclerView.setLoading(true);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_new_journal: {
+                launchNewJournal();
+                break;
+            }
+            case R.id.nav_logout: {
+                signOut();
+                break;
+            }
+            case R.id.nav_about: {
+                AboutPage.launchAboutPage(this);
+                break;
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

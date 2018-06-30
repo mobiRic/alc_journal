@@ -2,6 +2,9 @@
     <string name="app_name">Ijenali</string>
 
     <!--Action Items-->
+    <string name="action_new_journal">Add New Thought</string>
+    <string name="action_sign_out">Sign Out</string>
+    <string name="action_about">About Ijenali</string>
     <string name="action_done_editing">Done</string>
     <string name="action_settings">Settings</string>
 
