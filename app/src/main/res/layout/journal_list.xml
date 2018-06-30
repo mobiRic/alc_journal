@@ -1,0 +1,34 @@
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <mobi.glowworm.lib.ui.widget.EmptyLoadingRecyclerView
+        android:id="@+id/journal_list"
+        android:name="mobi.glowworm.journal.JournalEntryListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="mobi.glowworm.journal.JournalListActivity"
+        tools:listitem="@layout/journal_list_content"/>
+
+    <TextView
+        android:id="@+id/journal_list_empty_view"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingEnd="@dimen/m32"
+        android:paddingStart="@dimen/m32"
+        android:text="@string/empty_journal_list"/>
+
+    <ProgressBar
+        android:id="@+id/journal_list_loading_view"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:indeterminate="true"/>
+</merge>
