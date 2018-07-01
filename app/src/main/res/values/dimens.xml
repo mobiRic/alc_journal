@@ -18,5 +18,8 @@
     <dimen name="m24">24dp</dimen>
     <dimen name="m32">32dp</dimen>
     <dimen name="m48">48dp</dimen>
+    <dimen name="m64">64dp</dimen>
+
+    <dimen name="card_corner_radius">2dp</dimen>
 
 </resources>
