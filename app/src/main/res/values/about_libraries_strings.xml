@@ -27,4 +27,14 @@
     <string name="library_GlowwormUtils_owner">Glowworm Software</string>
     <string name="library_GlowwormUtils_year">2011</string>
 
+    <!-- App Launcher Icon-->
+    <string name="define_Icon">year;owner</string>
+    <string name="library_Icon_author">Kshitij Bhardwaj</string>
+    <string name="library_Icon_authorWebsite">https://www.linkedin.com/in/kshitijb/</string>
+    <string name="library_Icon_libraryName">Launcher Icon</string>
+    <string name="library_Icon_libraryDescription">Diary image used for branding and launcher icon, downloaded from The Noun Project.</string>
+    <string name="library_Icon_licenseVersion">Public Domain</string>
+    <string name="library_Icon_isOpenSource">true</string>
+    <string name="library_Icon_owner">Kshitij Bhardwaj</string>
+
 </resources>

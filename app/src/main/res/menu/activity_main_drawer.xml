@@ -8,16 +8,16 @@
         android:checkableBehavior="none">
         <item
             android:id="@+id/nav_new_journal"
-            android:icon="@android:drawable/ic_menu_edit"
+            android:icon="@drawable/ic_action_new_journal"
             android:title="@string/action_new_journal"/>
         <item
             android:id="@+id/nav_logout"
-            android:icon="@android:drawable/ic_menu_revert"
+            android:icon="@drawable/ic_action_sign_out"
             android:title="@string/action_sign_out"/>
     </group>
 
     <item
         android:id="@+id/nav_about"
-        android:icon="@android:drawable/ic_menu_help"
+        android:icon="@drawable/ic_action_about"
         android:title="@string/action_about"/>
 </menu>

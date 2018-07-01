@@ -3,8 +3,8 @@ apply plugin: 'io.fabric'
 
 ext {
     appVersions = [
-            code: 1,
-            name: '0.0.1'
+            code: 2,
+            name: '0.2.0'
     ]
     buildVersions = [
             compileSdk: 27,
@@ -146,6 +146,20 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${testVersions.espresso}"
 
     testImplementation "android.arch.persistence.room:testing:${libVersions.aacRoom}"
+}
+
+/**
+ * Copy the APK file into extras folder. Run this task at the end of a release build and commit to git.
+ *
+ * This task will not work if destination folder is the root folder due to a `fileHashes.lock` issue.
+ *
+ * @see https://gist.github.com/caipivara/bfb2fb5732d760e766f5
+ * @see https://stackoverflow.com/a/47262820/383414
+ */
+task copyApk(type: Copy) {
+    from "build/outputs/apk/release"
+    into "../extras"
+    include "*-release.apk"
 }
 
 apply plugin: 'com.google.gms.google-services'

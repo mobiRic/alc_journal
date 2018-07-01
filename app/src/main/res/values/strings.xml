@@ -1,18 +1,18 @@
 <resources>
-    <string name="app_name">Ijenali</string>
+    <string name="app_name">Dayli</string>
 
     <!--Action Items-->
-    <string name="action_new_journal">New Entry</string>
+    <string name="action_new_journal">New Thought</string>
     <string name="action_sign_out">Sign Out</string>
-    <string name="action_about">About Ijenali</string>
+    <string name="action_about">About Dayli Journal</string>
     <string name="action_done_editing">Done</string>
     <string name="action_delete">Delete</string>
     <string name="action_settings">Settings</string>
 
     <!--Alerts-->
-    <string name="alert_delete_journal_title">Delete Entry?</string>
+    <string name="alert_delete_journal_title">Delete Thought?</string>
     <string name="alert_delete_journal_message">Are you sure you would like to delete this thought?\n\nIt will be gone forever…</string>
-    <string name="alert_delete_journal_btn_positive">Delete Entry</string>
+    <string name="alert_delete_journal_btn_positive">Delete Thought</string>
     <string name="alert_delete_journal_btn_negative">@android:string/no</string>
 
     <!--Navigation Drawer-->
@@ -21,20 +21,21 @@
 
     <!--Sign In-->
     <string name="content_signin_branding">This is the launch screen</string>
-    <string name="desc_signin_branding">Follow your Dreams\n\nCapture your Thoughts\n\nFulfill your Potential</string>
+    <string name="title_signin_branding">An Every Day Journal for your Pocket</string>
+    <string name="desc_signin_branding">Follow your Dreams\nCapture your Thoughts\nFulfill your Potential</string>
     <string name="rationale_signin">Google Sign In is required for security reasons.\n\nWe will always ensure your private information is kept secret.</string>
 
     <!--Journal List-->
-    <string name="title_journal_list">@string/app_name</string>
-    <string name="empty_journal_list">Welcome to Ijenali!\n\nWhy not try adding a new journal with the button below.</string>
+    <string name="title_journal_list">Dayli Journal</string>
+    <string name="empty_journal_list">Welcome to Dayli!\n\nStart by adding a thought with the button below.</string>
 
     <!--Journal Details-->
-    <string name="title_journal_detail">Thoughts &amp; Feelings</string>
+    <string name="title_journal_detail">Dayli Thought</string>
     <string name="hint_journal_title">What\'s on your mind?</string>
     <string name="hint_journal_description">Tell me more about it…</string>
 
     <!--About-->
-    <string name="title_about">@string/action_about</string>
+    <string name="title_about">About Dayli Journals</string>
     <string name="about_desc">Follow your Dreams, Capture your Thoughts, Fulfill your Potential!</string>
 
     <!--Format Strings-->
