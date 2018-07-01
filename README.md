@@ -67,17 +67,22 @@ Screenshots
 -----------
 
 ![Sign In](/extras/screenshots/Sign%20In.png)
+<img src="https://github.com/mobiRic/alc_journal/raw/master/extras/screenshots/Sign%20In.png" width="360" title="About and Open Source Licences">
 ![Home](/extras/screenshots/Home.png)
+<img src="https://github.com/mobiRic/alc_journal/raw/master/extras/screenshots/Home.png" width="360" title="Home">
 ![Navigation Drawer](/extras/screenshots/Navigation%20Drawer.png)
+<img src="https://github.com/mobiRic/alc_journal/raw/master/extras/screenshots/Navigation%20Drawer.png" width="360" title="Navigation Drawer">
 ![Read Thought](/extras/screenshots/Read%20Thought.png)
+<img src="https://github.com/mobiRic/alc_journal/raw/master/extras/screenshots/Read%20Thought.png" width="360" title="Read Thought">
 ![Add Thought](/extras/screenshots/Add%20Thought.png)
-![About and Open Source Licences](/extras/screenshots/About%20Dayli.png)
+<img src="https://github.com/mobiRic/alc_journal/raw/master/extras/screenshots/Add%20Thought.png" width="360" title="Add Thought">
+<img src="https://github.com/mobiRic/alc_journal/raw/master/extras/screenshots/About%20Dayli.png" width="360" title="About and Open Source Licences">
 
 Download
 --------
 
 Dayli can be downloaded and installed from this Github repo:
-- [Install Dayli](/extras/app-release.apk)
+- [Install Dayli](https://github.com/mobiRic/alc_journal/raw/master/extras/app-release.apk)
 
 Author
 ------
