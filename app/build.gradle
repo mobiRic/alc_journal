@@ -3,8 +3,8 @@ apply plugin: 'io.fabric'
 
 ext {
     appVersions = [
-            code: 1,
-            name: '0.0.1'
+            code: 2,
+            name: '0.2.0'
     ]
     buildVersions = [
             compileSdk: 27,
