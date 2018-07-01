@@ -76,6 +76,7 @@ public class DetailActivity extends ABaseActivity {
         // check for rotation
         if (savedInstanceState != null) {
             journalId = savedInstanceState.getInt(KEY_JOURNAL_ID, NEW_JOURNAL);
+            Dbug.log("Refreshed saved state [", journalId, "]");
         }
 
         // check for existing journal
@@ -109,13 +110,13 @@ public class DetailActivity extends ABaseActivity {
     }
 
     /**
-     * Automatically save changes to the journal entry.
+     * Automatically save changes to the journal entry when
+     * user chooses to leave the activity.
      * <p>
      * This provides a much more natural user experience than
      * requiring the user to save changes manually.
      */
-    @Override
-    protected void onStop() {
+    protected void saveChanges() {
         Dbug.log("Checking for changes");
 
         // check for updates
@@ -152,7 +153,6 @@ public class DetailActivity extends ABaseActivity {
                 }
             });
         }
-        super.onStop();
     }
 
     /**
@@ -162,6 +162,8 @@ public class DetailActivity extends ABaseActivity {
      */
     @NonNull
     private JournalEntry createJournalFromUi() {
+        Dbug.log("Creating new journal in memory [", journalId, "]");
+
         String title = tvTitle.getText().toString();
         String description = tvDesc.getText().toString();
         JournalEntry journal = new JournalEntry(getCurrentUserId(), title, description, date);
@@ -190,7 +192,7 @@ public class DetailActivity extends ABaseActivity {
     }
 
     private void initUiForNewJournal() {
-        Dbug.log("New journal");
+        Dbug.log("New journal [", journalId, "]");
         updateUiForDate(date);
         tvTitle.requestFocus();
 
@@ -233,6 +235,8 @@ public class DetailActivity extends ABaseActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        Dbug.log("Saving instance state [", journalId, "]");
+
         outState.putInt(KEY_JOURNAL_ID, journalId);
         super.onSaveInstanceState(outState);
     }
@@ -261,6 +265,8 @@ public class DetailActivity extends ABaseActivity {
     @Override
     public void onBackPressed() {
         // TODO do we need to implement a confirmation dialog?
+        saveChanges();
+
         super.onBackPressed();
     }
 
